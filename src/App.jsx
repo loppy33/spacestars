@@ -5,10 +5,10 @@ import { useEffect, useState } from 'react';
 import { useExpand, useThemeParams } from '@vkruglikov/react-telegram-web-app';
 
 function App() {
-  const expand = useExpand()
+  const [isExpanded, expand] = useExpand();
 
   useEffect(() => {
-    expand()
+    !isExpanded ? null : expand()
   }, [])
 
 

@@ -8,10 +8,10 @@ export default function Home() {
     return (
         <div className="Home">
             <div className="container">
-                {/* <User />
+                <User />
                 <Game/>
                 <Farm/>
-                <Footer/> */}
+                <Footer/>
             </div>
         </div>
     )

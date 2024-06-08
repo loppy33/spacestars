@@ -12,13 +12,11 @@ function App() {
   }, [])
 
 
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/spacestars/" element={<Home />} />
-        {/* <Route path="blogs" element={<Blogs />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NoPage />} /> */}
       </Routes>
     </BrowserRouter>
   )

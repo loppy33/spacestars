@@ -8,14 +8,14 @@ function App() {
   const [isExpanded, expand] = useExpand();
 
   useEffect(() => {
-    !isExpanded ? null : expand()
+    !isExpanded && expand()
   }, [])
 
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Home />} />
+        <Route path="/spacestars/" element={<Home isExpanded={isExpanded}/>} />
         {/* <Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
           <Route path="*" element={<NoPage />} /> */}

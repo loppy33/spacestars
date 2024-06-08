@@ -6,9 +6,11 @@ import { useExpand, useThemeParams } from '@vkruglikov/react-telegram-web-app';
 
 function App() {
   const [isExpanded, expand] = useExpand();
+  const [colorScheme, themeParams] = useThemeParams();
 
   useEffect(() => {
     !isExpanded && expand()
+    themeParams.bg_color = "#000000"
   }, [])
 
 

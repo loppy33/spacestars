@@ -9,6 +9,10 @@ import { WebAppProvider, BackButton } from '@vkruglikov/react-telegram-web-app';
 
 export default function Frens() {
     let navigate = useNavigate();
+    const routeChange = () => {
+        let path = `/spacestars/`;
+        navigate(path);
+    }
 
     return (
         <WebAppProvider
@@ -67,7 +71,7 @@ export default function Frens() {
                         </div>
                     </div>
                 </div>
-                <BackButton onClick={navigate("/spacestars/")} />
+                <BackButton onClick={routeChange} />
             </div>
         </WebAppProvider>
     )

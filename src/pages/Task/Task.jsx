@@ -22,7 +22,7 @@ export default function Task() {
                 </div>
                 <SpaceTask />
             </div>
-            <BackButton onClick={() => routeChange} />
+            <BackButton onClick={routeChange} />
         </div>
     )
 }

@@ -8,10 +8,7 @@ import Achivment from './components/achivment/achivment';
 
 export default function Task() {
     let navigate = useNavigate();
-    const routeChange = () => {
-        let path = `/spacestars/`;
-        navigate(path);
-    }
+
 
     const [choice, setChoice] = useState(true)
 
@@ -40,7 +37,7 @@ export default function Task() {
                     }
                 </div>
                 {/* Здесь мы вызываем функцию routeChange */}
-                <BackButton onClick={routeChange} />
+                <BackButton onClick={navigate("/spacestars/")} />
             </div>
         </WebAppProvider>
     );

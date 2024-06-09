@@ -1,5 +1,6 @@
 import Home from "./pages/Home/Home"
 import Task from "./pages/Task/Task"
+import Frens from "./pages/Frens/Frens";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from 'react';
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/spacestars/" element={<Home />} />
         <Route path="/spacestars/task" element={<Task />} />
+        <Route path="/spacestars/frens" element={<Frens />} />
       </Routes>
     </BrowserRouter>
   )

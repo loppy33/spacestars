@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function Task() {
     let navigate = useNavigate();
     const routeChange = () => {
-        let path = `/`;
+        let path = `/spacestars/`;
         navigate(path);
     }
 

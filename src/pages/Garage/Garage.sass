@@ -1,0 +1,65 @@
+.Garage
+    background-image: url('../../assets/garageBack.png')
+    background-size: 100%
+    background-position: top
+    height: 45vh
+    text-align: center
+    background-color: red
+
+    .infoContainer
+        padding-top: 20px
+        width: 70%
+        margin: auto
+
+        .money
+            display: flex
+            align-items: center
+            justify-content: center
+            padding: 10px 0
+
+            background: #FFFFFF1A
+            border-radius: 16px
+            backdrop-filter: blur(10px)
+            gap: 10px
+            font-weight: 400
+            font-size: 20px
+
+            img
+                width: 25px
+
+        .rocket
+            margin: 20px 0
+            width: 60%
+            animation: rocketFly 3s infinite
+
+            @keyframes rocketFly
+                0%
+                    transform: translateY(0%)
+
+                50%
+                    transform: translateY(5%)
+
+                100%
+                    transform: translateY(0%)
+
+    .choice
+        height: 10vh
+        background-color: #FFFFFF1A
+        display: flex
+        align-items: center
+        justify-content: space-evenly
+        border-radius: 10px
+        padding: 10px
+
+        button
+            font-size: 14px
+            background-color: transparent
+
+            padding: 15px 30px
+            border-radius: 10px
+            letter-spacing: 1px
+            font-weight: 400
+            width: 50%
+
+            &.active
+                background-color: #6400CF

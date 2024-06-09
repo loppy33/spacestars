@@ -25,7 +25,7 @@ export default function Frens() {
                     <div className="frensTitleContainer">
                         <img className='icon' src={FrensIcon} alt="" />
                         <h3>Invite frens, earn <br /> bonus</h3>
-                        <button><img src={TopIcon} alt="" /> Top 100</button>
+                        <button onClick={() => navigate('/spacestars/top')}><img src={TopIcon} alt="" /> Top 100</button>
                     </div>
                     <div className="inviteList">
                         <h2>Invite list <span>4 frens</span></h2>

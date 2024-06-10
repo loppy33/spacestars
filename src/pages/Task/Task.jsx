@@ -39,7 +39,6 @@ export default function Task() {
                             </>
                     }
                 </div>
-                {/* Здесь мы вызываем функцию routeChange */}
                 <BackButton onClick={routeChange} />
             </div>
         </WebAppProvider>

@@ -31,7 +31,7 @@ export default function Top() {
     const sliderRef = useRef(null);
     let navigate = useNavigate();
     const routeChange = () => {
-        let path = `/spacestars/frens/`;
+        let path = `/spacestars/`;
         navigate(path);
     }
 

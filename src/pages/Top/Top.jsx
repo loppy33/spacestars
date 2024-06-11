@@ -19,110 +19,123 @@ import Top2 from '../../assets/icons/top2.png'
 import Top3 from '../../assets/icons/top3.png'
 
 
+import { useNavigate } from "react-router-dom";
 
 import { useRef } from 'react';
 
+import { WebAppProvider, BackButton } from '@vkruglikov/react-telegram-web-app';
 
+let navigate = useNavigate();
+const routeChange = () => {
+    let path = `/spacestars/frens`;
+    navigate(path);
+}
 
 
 export default function Top() {
     const sliderRef = useRef(null);
 
     return (
-        <div className="Top">
-            <div className="container">
+        <WebAppProvider
+            options={{
+                smoothButtonsTransition: true,
+            }}
+        >
+            <div className="Top">
+                <div className="container">
 
-                <Swiper ref={sliderRef}
-                    spaceBetween={30}
-                    navigation={{
-                        nextEl: '.swiper-button-next-custom',
-                        prevEl: '.swiper-button-prev-custom',
-                    }}
-                    modules={[Navigation]}
-                    className="mySwiper"
-                >
-                    <SwiperSlide>
-                        <div className='topContainer'>
-                            <img src={Rank} alt="" />
-                            <h1>Major Sr</h1>
-                            <p>50,094.434/100,000,000</p>
-                            <span className='lvlbar'></span>
-                            <ul>
-                                <li>
+                    <Swiper ref={sliderRef}
+                        spaceBetween={30}
+                        navigation={{
+                            nextEl: '.swiper-button-next-custom',
+                            prevEl: '.swiper-button-prev-custom',
+                        }}
+                        modules={[Navigation]}
+                        className="mySwiper"
+                    >
+                        <SwiperSlide>
+                            <div className='topContainer'>
+                                <img src={Rank} alt="" />
+                                <h1>Major Sr</h1>
+                                <p>50,094.434/100,000,000</p>
+                                <span className='lvlbar'></span>
+                                <ul>
+                                    <li>
+                                        <div className="info">
+                                            <img src={UserAvatar} alt="" />
+                                            <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
+                                        </div>
+
+                                        <img className='top' src={Top1} alt="" />
+                                    </li>
+                                    <li>
+                                        <div className="info">
+                                            <img src={UserAvatar} alt="" />
+                                            <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
+                                        </div>
+
+                                        <img className='top' src={Top2} alt="" />
+
+                                    </li>
+                                    <li>
+                                        <div className="info">
+                                            <img src={UserAvatar} alt="" />
+                                            <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
+                                        </div>
+
+                                        <img className='top' src={Top3} alt="" />
+
+                                    </li>
+                                    <li>
+                                        <div className="info">
+                                            <img src={UserAvatar} alt="" />
+                                            <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
+                                        </div>
+
+                                        <span className='toprank'>4</span>
+                                    </li>
+                                    <li>
+                                        <div className="info">
+                                            <img src={UserAvatar} alt="" />
+                                            <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
+                                        </div>
+
+                                        <span className='toprank'>5</span>
+                                    </li>
+                                    <li>
+                                        <div className="info">
+                                            <img src={UserAvatar} alt="" />
+                                            <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
+                                        </div>
+
+                                        <span className='toprank'>6</span>
+                                    </li>
+                                </ul>
+                                <div className="userInfo">
                                     <div className="info">
                                         <img src={UserAvatar} alt="" />
-                                        <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
+                                        <p>Andrew Anubis <br /> <span>23,432 PN</span></p>
                                     </div>
 
-                                    <img className='top' src={Top1} alt="" />
-                                </li>
-                                <li>
-                                    <div className="info">
-                                        <img src={UserAvatar} alt="" />
-                                        <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
-                                    </div>
-
-                                    <img className='top' src={Top2} alt="" />
-
-                                </li>
-                                <li>
-                                    <div className="info">
-                                        <img src={UserAvatar} alt="" />
-                                        <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
-                                    </div>
-
-                                    <img className='top' src={Top3} alt="" />
-
-                                </li>
-                                <li>
-                                    <div className="info">
-                                        <img src={UserAvatar} alt="" />
-                                        <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
-                                    </div>
-
-                                    <span className='toprank'>4</span>
-                                </li>
-                                <li>
-                                    <div className="info">
-                                        <img src={UserAvatar} alt="" />
-                                        <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
-                                    </div>
-
-                                    <span className='toprank'>5</span>
-                                </li>
-                                <li>
-                                    <div className="info">
-                                        <img src={UserAvatar} alt="" />
-                                        <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
-                                    </div>
-
-                                    <span className='toprank'>6</span>
-                                </li>
-                            </ul>
-                            <div className="userInfo">
-                                <div className="info">
-                                    <img src={UserAvatar} alt="" />
-                                    <p>Andrew Anubis <br /> <span>23,432 PN</span></p>
+                                    <span>23111</span>
                                 </div>
-
-                                <span>23111</span>
                             </div>
+                        </SwiperSlide>
+
+                        <SwiperSlide>Slide 2</SwiperSlide>
+                        <SwiperSlide>Slide 3</SwiperSlide>
+                        <SwiperSlide>Slide 4</SwiperSlide>
+                        <SwiperSlide>Slide 5</SwiperSlide>
+                        <div className="swiper-button-prev-custom">
+                            <img src={leftArrow} alt="Previous" />
                         </div>
-                    </SwiperSlide>
-
-                    <SwiperSlide>Slide 2</SwiperSlide>
-                    <SwiperSlide>Slide 3</SwiperSlide>
-                    <SwiperSlide>Slide 4</SwiperSlide>
-                    <SwiperSlide>Slide 5</SwiperSlide>
-                    <div className="swiper-button-prev-custom">
-                        <img src={leftArrow} alt="Previous" />
-                    </div>
-                    <div className="swiper-button-next-custom">
-                        <img src={rightArrow} alt="Next" />
-                    </div>
-                </Swiper>
+                        <div className="swiper-button-next-custom">
+                            <img src={rightArrow} alt="Next" />
+                        </div>
+                    </Swiper>
+                </div>
+                <BackButton onClick={routeChange} />
             </div>
-
-        </div>
+        </WebAppProvider>
     )
 }

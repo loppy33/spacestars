@@ -25,15 +25,15 @@ import { useRef } from 'react';
 
 import { WebAppProvider, BackButton } from '@vkruglikov/react-telegram-web-app';
 
-let navigate = useNavigate();
-const routeChange = () => {
-    let path = `/spacestars/frens`;
-    navigate(path);
-}
 
 
 export default function Top() {
     const sliderRef = useRef(null);
+    let navigate = useNavigate();
+    const routeChange = () => {
+        let path = `/spacestars/frens`;
+        navigate(path);
+    }
 
     return (
         <WebAppProvider

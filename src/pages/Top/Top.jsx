@@ -1,40 +1,37 @@
-import './Top.sass'
+import './Top.sass';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import UserAvatar from '../../assets/icons/userAvatr.png'
+import UserAvatar from '../../assets/icons/userAvatr.png';
+
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-
-// import required modules
+// Import required modules
 import { Navigation } from 'swiper/modules';
 
-import leftArrow from '../../assets/icons/arrowPrev.png'
-import rightArrow from '../../assets/icons/arrowNext.png'
-import Rank from '../../assets/rank.png'
+import leftArrow from '../../assets/icons/arrowPrev.png';
+import rightArrow from '../../assets/icons/arrowNext.png';
+import Rank from '../../assets/rank.png';
 
-import Top1 from '../../assets/icons/top1.png'
-import Top2 from '../../assets/icons/top2.png'
-import Top3 from '../../assets/icons/top3.png'
+import Top1 from '../../assets/icons/top1.png';
+import Top2 from '../../assets/icons/top2.png';
+import Top3 from '../../assets/icons/top3.png';
 
-
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 
 import { WebAppProvider, BackButton } from '@vkruglikov/react-telegram-web-app';
 
-
-
 export default function Top() {
-    const sliderRef = useRef(null);
-    
     let navigate = useNavigate();
+
     const routeChange = () => {
         let path = `/spacestars/frens`;
         navigate(path);
-    }
+    };
+
+    const sliderRef = useRef(null);
 
     return (
         <WebAppProvider
@@ -43,11 +40,9 @@ export default function Top() {
             }}
         >
             <div className="Top">
-                <BackButton onClick={routeChange} />
-
                 <div className="container">
-
-                    <Swiper ref={sliderRef}
+                    <Swiper
+                        ref={sliderRef}
                         spaceBetween={30}
                         navigation={{
                             nextEl: '.swiper-button-next-custom',
@@ -68,7 +63,6 @@ export default function Top() {
                                             <img src={UserAvatar} alt="" />
                                             <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
                                         </div>
-
                                         <img className='top' src={Top1} alt="" />
                                     </li>
                                     <li>
@@ -76,25 +70,20 @@ export default function Top() {
                                             <img src={UserAvatar} alt="" />
                                             <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
                                         </div>
-
                                         <img className='top' src={Top2} alt="" />
-
                                     </li>
                                     <li>
                                         <div className="info">
                                             <img src={UserAvatar} alt="" />
                                             <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
                                         </div>
-
                                         <img className='top' src={Top3} alt="" />
-
                                     </li>
                                     <li>
                                         <div className="info">
                                             <img src={UserAvatar} alt="" />
                                             <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
                                         </div>
-
                                         <span className='toprank'>4</span>
                                     </li>
                                     <li>
@@ -102,7 +91,6 @@ export default function Top() {
                                             <img src={UserAvatar} alt="" />
                                             <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
                                         </div>
-
                                         <span className='toprank'>5</span>
                                     </li>
                                     <li>
@@ -110,7 +98,6 @@ export default function Top() {
                                             <img src={UserAvatar} alt="" />
                                             <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
                                         </div>
-
                                         <span className='toprank'>6</span>
                                     </li>
                                 </ul>
@@ -119,7 +106,6 @@ export default function Top() {
                                         <img src={UserAvatar} alt="" />
                                         <p>Andrew Anubis <br /> <span>23,432 PN</span></p>
                                     </div>
-
                                     <span>23111</span>
                                 </div>
                             </div>
@@ -137,7 +123,8 @@ export default function Top() {
                         </div>
                     </Swiper>
                 </div>
+                <BackButton onClick={routeChange} text="Back" />
             </div>
         </WebAppProvider>
-    )
+    );
 }

@@ -6,6 +6,7 @@ import Garage from "./pages/Garage/Garage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from 'react';
 import { useExpand, useThemeParams } from '@vkruglikov/react-telegram-web-app';
+import Top from "./pages/Top/Top";
 
 const tg = window.Telegram.WebApp
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/spacestars/task" element={<Task />} />
         <Route path="/spacestars/frens" element={<Frens />} />
         <Route path="/spacestars/garage" element={<Garage />} />
+        <Route path="/spacestars/top" element={<Top />} />
       </Routes>
     </BrowserRouter>
   )

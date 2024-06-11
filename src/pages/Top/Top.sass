@@ -1,0 +1,169 @@
+.Top
+    background: linear-gradient(179.94deg, rgba(100, 0, 207, 0.5) 0.05%, rgba(100, 0, 207, 0) 36.85%)
+
+    .swiper
+        height: 100vh
+
+        &-slide
+            text-align: center
+            font-size: 18px
+
+            display: flex
+            justify-content: center
+
+        .swiper-button-prev-custom, .swiper-button-next-custom
+            position: absolute
+            top: 15%
+            width: 40px
+            height: 40px
+            display: flex
+            justify-content: center
+            align-items: center
+            background-color: rgba(0, 0, 0, 0.5) // Optional: For better visibility
+            border-radius: 50% // Optional: For circular buttons
+            cursor: pointer
+            z-index: 10
+
+            &.swiper-button-prev-custom
+                left: 0
+            &.swiper-button-next-custom
+                right: 0
+            img
+                width: 100%
+                height: 100%
+
+        .topContainer
+
+            width: 100%
+            height: 100vh
+
+            img
+                width: 35%
+                margin-top: 15%
+
+            h1
+                font-size: 22px
+                margin-top: 5%
+
+            p
+                font-size: 16px
+                margin-top: 5%
+                font-weight: 300
+
+            .lvlbar
+                width: 80%
+                margin: auto
+
+                height: 10px
+                display: block
+                background-color: #FFFFFF1A
+                margin-top: 2.5%
+                border-radius: 10px
+
+                position: relative
+
+                &::before
+                    content: ''
+                    border-radius: 10px
+                    background: linear-gradient(90deg, #6400CF 0%, #CB5ADD 100%)
+                    position: absolute
+                    top: 0%
+
+                    left: 0%
+                    width: 50%
+                    height: 100%
+
+            ul
+                overflow: scroll
+                overflow-x: hidden
+                margin-top: 5%
+                height: 45%
+                // background-color: red
+                overflow: scroll
+                overflow-x: hidden
+
+                li
+                    border-radius: 10px
+                    background-color: #FFFFFF1A
+
+                    display: flex
+                    justify-content: space-between
+                    align-items: center
+                    padding: 10px
+                    margin: 10px 0
+
+                    .top
+                        margin-top: 0
+                        width: 25px
+                        margin-right: 5px
+
+                    .toprank
+                        color: #00F49C
+                        background: #FFFFFF1A
+
+                        font-size: 12px
+                        padding: 16px
+                        border-radius: 50%
+                        width: 25px
+                        height: 25px
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        color: #fff
+
+                    .info
+                        text-align: left
+                        display: flex
+                        align-items: center
+                        gap: 10px
+                        font-weight: 500
+
+                        p
+                            margin-top: 0
+                            font-size: 14px
+
+                        img
+                            width: 40px
+                            margin-top: 0
+
+                        span
+                            font-weight: 400
+                            font-size: 14px
+                            color: #FFFFFF66
+
+            .userInfo
+                height: 10vh
+                display: flex
+                align-items: center
+                justify-content: space-between
+                border: 1px solid #6400CF
+                border-radius: 10px
+                padding: 10px
+
+                .info
+                    text-align: left
+                    display: flex
+                    align-items: center
+                    gap: 10px
+                    font-weight: 500
+
+                    p
+                        margin-top: 0
+                        font-size: 14px
+
+                    img
+                        width: 40px
+                        margin-top: 0
+
+                    span
+                        font-weight: 400
+                        font-size: 14px
+                        color: #FFFFFF66
+                        background-color: transparent
+                        padding: 0
+
+                span
+                    background-color: #6400CF
+                    padding: 8px
+                    border-radius: 20px
+                    font-size: 14px

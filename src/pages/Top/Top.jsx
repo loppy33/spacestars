@@ -29,9 +29,10 @@ import { WebAppProvider, BackButton } from '@vkruglikov/react-telegram-web-app';
 
 export default function Top() {
     const sliderRef = useRef(null);
+    
     let navigate = useNavigate();
     const routeChange = () => {
-        let path = `/spacestars/`;
+        let path = `/spacestars/frens`;
         navigate(path);
     }
 
@@ -42,6 +43,8 @@ export default function Top() {
             }}
         >
             <div className="Top">
+                <BackButton onClick={routeChange} />
+
                 <div className="container">
 
                     <Swiper ref={sliderRef}
@@ -134,7 +137,6 @@ export default function Top() {
                         </div>
                     </Swiper>
                 </div>
-                <BackButton onClick={routeChange} />
             </div>
         </WebAppProvider>
     )

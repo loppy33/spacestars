@@ -7,7 +7,6 @@
     overflow: hidden
     position: relative
 
-
     display: flex
     align-items: flex-end
     justify-content: space-between
@@ -82,7 +81,7 @@
                 width: 15%
                 top: 40%
                 right: 35%
-                animation: rocket 15s infinite
+                animation: rocket 5s infinite
 
             @keyframes planetsA
                 0%
@@ -106,16 +105,16 @@
 
             @keyframes rocket
                 0%
-                    transform: translate(0, 0) rotate(0deg) rotate(15deg)
+                    transform: translateY(0%)
 
                 25%
-                    transform: translate(100px, -50px) rotate(-60deg)
+                    transform: translateY(-25%)
 
                 50%
-                    transform: translate(0, -80px) rotate(-60deg)
+                    transform: translateY(0%)
 
                 75%
-                    transform: translate(-150px, -50px) rotate(60deg)
+                    transform: translateY(-50%) scale(1.1)
 
                 100%
-                    transform: translate(0, 0) rotate(720deg) rotate(15deg)
+                    transform: translateY(-0%)

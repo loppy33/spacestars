@@ -6,11 +6,18 @@ import Border from "../assets/border.png"
 export default function User() {
     // Получение данных пользователя из Telegram WebApp
     const user = window.Telegram.WebApp.initDataUnsafe.user;
+    const firstLetter = user?.username ? user.username.charAt(0) : 'U';
 
     return (
         <div className="User">
             <div className="avatarContainer">
+                {user?.photo_url ? 
                 <img className='avatar' src={user?.photo_url || UserAvatr} alt={user?.username || 'User Avatar'} />
+                :
+                <span className="avatarFallback">
+                    {firstLetter}
+                </span>
+            }
                 <img className='rank' src={UserRank} alt="Rank" />
                 <img src={Border} className='border' alt="Border" />
             </div>

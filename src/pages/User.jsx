@@ -1,5 +1,4 @@
 import './User.sass'
-import UserAvatr from "../assets/avatar.png"
 import UserRank from "../assets/rank.png"
 import Border from "../assets/border.png"
 
@@ -11,13 +10,13 @@ export default function User() {
     return (
         <div className="User">
             <div className="avatarContainer">
-                {user?.photo_url ? 
-                <img className='avatar' src={user?.photo_url || UserAvatr} alt={user?.username || 'User Avatar'} />
-                :
-                <span className="avatarFallback">
-                    {firstLetter}
-                </span>
-            }
+                {user?.photo_url ?
+                    <img className='avatar' src={user.photo_url} alt={user?.username || 'User Avatar'} />
+                    :
+                    <span className="avatarFallback">
+                        {firstLetter}
+                    </span>
+                }
                 <img className='rank' src={UserRank} alt="Rank" />
                 <img src={Border} className='border' alt="Border" />
             </div>

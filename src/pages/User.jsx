@@ -6,7 +6,7 @@ import Border from "../assets/border.png"
 export default function User() {
     // Получение данных пользователя из Telegram WebApp
     const user = window.Telegram.WebApp.initDataUnsafe.user;
-    const firstLetter = user?.username ? user.username.charAt(0) : 'U';
+    const firstLetter = user?.username ? user.username.charAt(0).toUpperCase() : 'U';
 
     return (
         <div className="User">

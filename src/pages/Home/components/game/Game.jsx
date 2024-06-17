@@ -5,7 +5,7 @@ import Planet1 from '../../../../assets/planet1.png'
 import Planet2 from '../../../../assets/planet2.png'
 import Planet3 from '../../../../assets/planet3.png'
 import Planet4 from '../../../../assets/planet4.png'
-import Rocket from '../../../../assets/rocket.png'
+import Rocket from '../../../../assets/Rocket_sil.png'
 
 export default function Game() {
     return (
@@ -14,11 +14,11 @@ export default function Game() {
             <button>PLAY</button>
             <div className="background">
                 <img src={BackEffect} alt="" className="backEffect" />
-                <img src={Planet1} alt="" className="planetes first" />
-                <img src={Planet2} alt="" className="planetes second" />
-                <img src={Planet3} alt="" className="planetes third" />
-                <img src={Planet4} alt="" className="planetes fourth" />
-                <img src={Rocket} alt="" className="planetes rocket" />
+                <img src={Planet1} alt="" className="planets first" />
+                <img src={Planet2} alt="" className="planets second" />
+                <img src={Planet3} alt="" className="planets third" />
+                <img src={Planet4} alt="" className="planets fourth" />
+                <img src={Rocket} alt="" className="planets rocket" />
             </div>
         </div>
     )

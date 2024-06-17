@@ -10,7 +10,7 @@ import Rocket from '../../../../assets/Rocket_sil.png'
 export default function Game() {
     return (
         <div className="Game">
-            <h2>SPACE GAME</h2> 
+            <h2>SPACE GAME</h2>
             <button>PLAY</button>
             <div className="background">
                 <img src={BackEffect} alt="" className="backEffect" />
@@ -18,7 +18,10 @@ export default function Game() {
                 <img src={Planet2} alt="" className="planets second" />
                 <img src={Planet3} alt="" className="planets third" />
                 <img src={Planet4} alt="" className="planets fourth" />
-                <img src={Rocket} alt="" className="planets rocket" />
+                <div className='planets rocket'>
+                    <img src={Rocket} alt="" />
+                </div>
+
             </div>
         </div>
     )

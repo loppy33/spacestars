@@ -5,6 +5,7 @@ import UserAvatar from '../../assets/icons/userAvatr.png'
 import CopyImg from '../../assets/icons/copyImg.png'
 import { useNavigate } from "react-router-dom";
 import { WebAppProvider, BackButton } from '@vkruglikov/react-telegram-web-app';
+import Footer from '../Home/components/footer/Footer'
 
 
 export default function Frens() {
@@ -31,6 +32,22 @@ export default function Frens() {
                         <h2>Invite list <span>4 frens</span></h2>
 
                         <ul>
+                            <li>
+                                <div className="info">
+                                    <img src={UserAvatar} alt="" />
+                                    <p>Andrew Anubis <br /> <span>Silver - 23,432 PN</span></p>
+                                </div>
+
+                                <span>17,212 PN</span>
+                            </li>
+                            <li>
+                                <div className="info">
+                                    <img src={UserAvatar} alt="" />
+                                    <p>Andrew Anubis <br /> <span>Silver - 23,432 PN</span></p>
+                                </div>
+
+                                <span>17,212 PN</span>
+                            </li>
                             <li>
                                 <div className="info">
                                     <img src={UserAvatar} alt="" />

@@ -3,14 +3,14 @@ import Farm from "./components/farm/Farm";
 import Footer from "./components/footer/Footer";
 import Game from "./components/game/Game";
 
-export default function Home() {
+export default function Home({checkBalance, setCheckBalance}) {
 
     return (
         <div className="Home">
             <div className="container">
-                <User />
+                <User checkBalance={checkBalance}  />
                 <Game/>
-                <Farm/>
+                <Farm setCheckBalance={setCheckBalance}/>
                 <Footer/>
             </div>
         </div>

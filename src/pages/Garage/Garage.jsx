@@ -7,6 +7,7 @@ import Starships from './components/starships/starships';
 
 import Rocket from '../../assets/rocket.png'
 import Money from '../../assets/money.png'
+import Footer from '../Home/components/footer/Footer';
 
 export default function Task() {
     let navigate = useNavigate();
@@ -34,21 +35,23 @@ export default function Task() {
                         <button className={choice ? 'rockets active' : 'rockets'} onClick={() => setChoice(true)}>Rockets</button>
                         <button className={choice ? 'starships' : 'starships active'} onClick={() => setChoice(false)}>Starships</button>
                     </div>
-                    {
-                        choice ?
-                            <>
-                                <Rockets />
-                            </>
-                            :
-                            <>
-                                <Starships />
-                            </>
-                    }
+                    <div className="choiceContainer">
+                        {
+                            choice ?
+                                <>
+                                    <Rockets />
+                                </>
+                                :
+                                <>
+                                    <Starships />
+                                </>
+                        }
+                    </div>
                 </div>
-                {/* Здесь мы вызываем функцию routeChange */}
+                <Footer />
                 <BackButton onClick={routeChange} />
             </div>
         </WebAppProvider>
-        
+
     );
 }

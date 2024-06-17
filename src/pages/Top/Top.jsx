@@ -53,7 +53,15 @@ export default function Top() {
                     >
                         <SwiperSlide>
                             <div className='topContainer'>
-                                <img src={Rank} alt="" />
+                                <div className="rankContainer">
+                                    <div className="swiper-button-prev-custom">
+                                        <img src={leftArrow} alt="Previous" />
+                                    </div>
+                                    <img className='rankImg' src={Rank} alt="" />
+                                    <div className="swiper-button-next-custom">
+                                        <img src={rightArrow} alt="Next" />
+                                    </div>
+                                </div>
                                 <h1>Major Sr</h1>
                                 <p>50,094.434/100,000,000</p>
                                 <span className='lvlbar'></span>
@@ -115,12 +123,7 @@ export default function Top() {
                         <SwiperSlide>Slide 3</SwiperSlide>
                         <SwiperSlide>Slide 4</SwiperSlide>
                         <SwiperSlide>Slide 5</SwiperSlide>
-                        <div className="swiper-button-prev-custom">
-                            <img src={leftArrow} alt="Previous" />
-                        </div>
-                        <div className="swiper-button-next-custom">
-                            <img src={rightArrow} alt="Next" />
-                        </div>
+
                     </Swiper>
                 </div>
                 <BackButton onClick={routeChange} text="Back" />

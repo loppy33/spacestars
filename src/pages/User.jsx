@@ -1,11 +1,34 @@
 import './User.sass'
 import UserRank from "../assets/rank.png"
 import Border from "../assets/border.png"
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-export default function User() {
+export default function User({checkBalance}) {
     // Получение данных пользователя из Telegram WebApp
     const user = window.Telegram.WebApp.initDataUnsafe.user;
     const firstLetter = user?.username ? user.username.charAt(0).toUpperCase() : 'U';
+    const [balance, setBalance] = useState(null);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                // const response = await axios.get(`http://localhost:3000/getUser/${user.id}`);
+
+                const response = await axios.get(`http://localhost:3000/getUser/1234`);
+                console.log(response.data.balance);
+                setBalance(response.data.balance);
+            } catch (error) {
+                console.error('Error fetching user data', error);
+            }
+        };
+
+        if (!user) {
+            fetchUserData();
+        }
+    }, [user, checkBalance]);
+
+    const formattedBalance = balance !== null ? parseFloat(balance.toFixed(3)).toLocaleString('en-US') : '0';
 
     return (
         <div className="User">
@@ -21,7 +44,7 @@ export default function User() {
                 <img src={Border} className='border' alt="Border" />
             </div>
             <h3>{user?.username || 'Username'}</h3>
-            <h2>50,094.434</h2>
+            <h2>{formattedBalance}</h2>
         </div>
     );
 }

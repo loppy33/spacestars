@@ -5,6 +5,7 @@ import { WebAppProvider, BackButton } from '@vkruglikov/react-telegram-web-app';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import Achivment from './components/achivment/achivment';
+import Footer from '../Home/components/footer/Footer';
 
 export default function Task() {
     let navigate = useNavigate();
@@ -39,6 +40,8 @@ export default function Task() {
                             </>
                     }
                 </div>
+                <Footer/>
+
                 <BackButton onClick={routeChange} />
             </div>
         </WebAppProvider>

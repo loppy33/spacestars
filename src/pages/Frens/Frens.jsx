@@ -87,6 +87,7 @@ export default function Frens() {
 
                         </div>
                     </div>
+                    <Footer/>
                 </div>
                 <BackButton onClick={routeChange} />
             </div>

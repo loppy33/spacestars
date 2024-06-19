@@ -2,6 +2,17 @@
     text-align: center
     padding-top: 10px
 
+    .copySuccess
+        transition: 0.3s
+        position: absolute
+        top: 2.5%
+        left: 50%
+        transform: translateX(-50%)
+        background-color: #ffffff18
+        padding: 5px 10px
+        border-radius: 10px
+        font-size: 12px
+
     .frensTitleContainer
         margin: auto
         height: 30vh
@@ -90,13 +101,16 @@
             gap: 10px
             padding: 20px 0
 
-            button
+            button, .invite
                 border-radius: 10px
                 background-color: #6400CF
                 font-size: 14px
                 letter-spacing: 1px
                 height: 100%
                 font-weight: 500
+                display: flex
+                justify-content: center
+                align-items: center
 
                 img
                     width: 50px

@@ -45,7 +45,7 @@ export default function Frens() {
         navigate(path);
     }
 
-    function telegramForwardButton(url, text = '') {
+    function telegramForwardButton(url, text = 'Hello') {
         const share_url = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
         return share_url
     }
@@ -98,7 +98,7 @@ export default function Frens() {
                             </li>
                         </ul>
                         <div className="btns">
-                            <a className='invite' href={telegramForwardButton}>Invite a fren</a>
+                            <a className='invite' href={telegramForwardButton()}>Invite a fren</a>
                             <CopyToClipboard text={refLink}>
                                 <button className="copy" onClick={handleCopy}>
                                     <img src={CopyImg} alt="" />

@@ -7,7 +7,7 @@ import axios from 'axios';
 export default function User({checkBalance}) {
     // Получение данных пользователя из Telegram WebApp
     // const user = window.Telegram.WebApp.initDataUnsafe.user;
-    const [user, setUser] = useState(window.Telegram.WebApp.initDataUnsafe.user)
+    const [user, setUser] = useState(window.Telegram.WebApp.initDataUnsafe)
     const firstLetter = user?.username ? user.username.charAt(0).toUpperCase() : 'U';
     const [balance, setBalance] = useState(null);
 

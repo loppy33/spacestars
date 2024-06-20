@@ -1,44 +1,91 @@
 import './Top.sass';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import UserAvatar from '../../assets/icons/userAvatr.png';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-
-// Import required modules
 import { Navigation } from 'swiper/modules';
-
 import leftArrow from '../../assets/icons/arrowPrev.png';
 import rightArrow from '../../assets/icons/arrowNext.png';
-import Rank from '../../assets/rank.png';
-
 import Top1 from '../../assets/icons/top1.png';
 import Top2 from '../../assets/icons/top2.png';
 import Top3 from '../../assets/icons/top3.png';
-
 import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
-
+import { useRef, useEffect, useState } from 'react';
 import { WebAppProvider, BackButton } from '@vkruglikov/react-telegram-web-app';
+
+import Bronze from '../../assets/bronze.png';
+import Silver from '../../assets/silver.png';
+import Gold from '../../assets/gold.png';
+import Platinum from '../../assets/platinum.png';
+import SpaceStar from '../../assets/cosmo.png';
+
 
 export default function Top() {
     let navigate = useNavigate();
+    const sliderRef = useRef(null);
+    const [categories, setCategories] = useState({
+        Bronze: [],
+        Silver: [],
+        Gold: [],
+        Platinum: [],
+        SpaceStar: []
+    });
 
-    const routeChange = () => {
-        let path = `/spacestars/frens`;
-        navigate(path);
+    useEffect(() => {
+        async function fetchTopUsers() {
+            try {
+                const response = await fetch('http://localhost:3000/api/users/top');
+                const data = await response.json();
+                setCategories(data);
+            } catch (error) {
+                console.error('Error fetching top users:', error);
+            }
+        }
+
+        fetchTopUsers();
+    }, []);
+
+    const renderUser = (user, index) => (
+        <li key={user.id}>
+            <div className="info">
+                <img src={user.avatar} alt="" />
+                <p>{user.name} <br /> <span>{user.balance.toLocaleString('en-US')} PN</span></p>
+            </div>
+            {index < 3 ? <img className='top' src={[Top1, Top2, Top3][index]} alt="" /> : <span className='toprank'>{index + 1}</span>}
+        </li>
+    );
+
+    const categoryLogos = {
+        Bronze,
+        Silver,
+        Gold,
+        Platinum,
+        SpaceStar
     };
 
-    const sliderRef = useRef(null);
+    const renderCategory = (categoryName, users) => (
+        <SwiperSlide key={categoryName}>
+            <div className='topContainer'>
+                <div className="rankContainer">
+                    <div className="swiper-button-prev-custom">
+                        <img src={leftArrow} alt="Previous" />
+                    </div>
+                    <img className='rankImg' src={categoryLogos[categoryName]} alt="" />
+                    <div className="swiper-button-next-custom">
+                        <img src={rightArrow} alt="Next" />
+                    </div>
+                </div>
+                <h1>{categoryName}</h1>
+                <ul>
+                    {users.map((user, index) => renderUser(user, index))}
+                </ul>
+            </div>
+        </SwiperSlide>
+    );
 
     return (
-        <WebAppProvider
-            options={{
-                smoothButtonsTransition: true,
-            }}
-        >
+        <WebAppProvider options={{ smoothButtonsTransition: true }}>
             <div className="Top">
                 <div className="container">
                     <Swiper
@@ -51,82 +98,10 @@ export default function Top() {
                         modules={[Navigation]}
                         className="mySwiper"
                     >
-                        <SwiperSlide>
-                            <div className='topContainer'>
-                                <div className="rankContainer">
-                                    <div className="swiper-button-prev-custom">
-                                        <img src={leftArrow} alt="Previous" />
-                                    </div>
-                                    <img className='rankImg' src={Rank} alt="" />
-                                    <div className="swiper-button-next-custom">
-                                        <img src={rightArrow} alt="Next" />
-                                    </div>
-                                </div>
-                                <h1>Major Sr</h1>
-                                <p>50,094.434/100,000,000</p>
-                                <span className='lvlbar'></span>
-                                <ul>
-                                    <li>
-                                        <div className="info">
-                                            <img src={UserAvatar} alt="" />
-                                            <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
-                                        </div>
-                                        <img className='top' src={Top1} alt="" />
-                                    </li>
-                                    <li>
-                                        <div className="info">
-                                            <img src={UserAvatar} alt="" />
-                                            <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
-                                        </div>
-                                        <img className='top' src={Top2} alt="" />
-                                    </li>
-                                    <li>
-                                        <div className="info">
-                                            <img src={UserAvatar} alt="" />
-                                            <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
-                                        </div>
-                                        <img className='top' src={Top3} alt="" />
-                                    </li>
-                                    <li>
-                                        <div className="info">
-                                            <img src={UserAvatar} alt="" />
-                                            <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
-                                        </div>
-                                        <span className='toprank'>4</span>
-                                    </li>
-                                    <li>
-                                        <div className="info">
-                                            <img src={UserAvatar} alt="" />
-                                            <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
-                                        </div>
-                                        <span className='toprank'>5</span>
-                                    </li>
-                                    <li>
-                                        <div className="info">
-                                            <img src={UserAvatar} alt="" />
-                                            <p>Andrew Anubis <br /> <span>11,323,432 PN</span></p>
-                                        </div>
-                                        <span className='toprank'>6</span>
-                                    </li>
-                                </ul>
-                                <div className="userInfo">
-                                    <div className="info">
-                                        <img src={UserAvatar} alt="" />
-                                        <p>Andrew Anubis <br /> <span>23,432 PN</span></p>
-                                    </div>
-                                    <span>23111</span>
-                                </div>
-                            </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide>Slide 2</SwiperSlide>
-                        <SwiperSlide>Slide 3</SwiperSlide>
-                        <SwiperSlide>Slide 4</SwiperSlide>
-                        <SwiperSlide>Slide 5</SwiperSlide>
-
+                        {Object.entries(categories).map(([categoryName, users]) => renderCategory(categoryName, users))}
                     </Swiper>
                 </div>
-                <BackButton onClick={routeChange} text="Back" />
+                <BackButton onClick={() => navigate('/spacestars/frens')} text="Back" />
             </div>
         </WebAppProvider>
     );

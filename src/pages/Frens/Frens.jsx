@@ -24,7 +24,7 @@ export default function Frens() {
                 const data = await response.json();
                 setFriends(data.friends);
             } catch (error) {
-                console.error('Error fetching friends:', error);
+                setFriends([]);
             }
         };
 
@@ -98,7 +98,7 @@ export default function Frens() {
                             </li>
                         </ul>
                         <div className="btns">
-                            <a className='invite' href={telegramForwardButton()}>Invite a fren</a>
+                            <a className='invite' href={telegramForwardButton(refLink)}>Invite a fren</a>
                             <CopyToClipboard text={refLink}>
                                 <button className="copy" onClick={handleCopy}>
                                     <img src={CopyImg} alt="" />

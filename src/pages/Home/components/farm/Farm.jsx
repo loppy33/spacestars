@@ -42,6 +42,7 @@ export default function Farm({ setCheckBalance }) {
         };
 
         if (farmingStartTime) {
+        
             const endTime = new Date(farmingStartTime);
             endTime.setHours(endTime.getHours() + 8); // 1 minute farming time
 

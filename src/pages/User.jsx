@@ -27,6 +27,7 @@ export default function User({checkBalance}) {
         if (!user) {
             fetchUserData();
         }
+        
     }, [user, checkBalance]);
 
     const formattedBalance = balance !== null ? parseFloat(balance.toFixed(3)).toLocaleString('en-US') : '0';

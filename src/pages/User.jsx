@@ -3,15 +3,12 @@ import UserRank from "../assets/rank.png"
 import Border from "../assets/border.png"
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useInitData } from '@vkruglikov/react-telegram-web-app';
 
 export default function User({ checkBalance }) {
-    // Получение данных пользователя из Telegram WebApp
     const user = window.Telegram.WebApp.initDataUnsafe.user;
-    const [initDataUnsafe] = useInitData();
     const firstLetter = user?.username ? user.username.charAt(0).toUpperCase() : 'U';
     const [balance, setBalance] = useState(null);
-    const [userPhoto, setUserPhoto] = useState(user ? `https://api.telegram.org/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/getUserProfilePhotos?user_id=${user.id}` : null)
+    const [userPhoto, setUserPhoto] = useState()
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -26,9 +23,23 @@ export default function User({ checkBalance }) {
             }
         };
 
+        const fetchUserPhoto = async (user) => {
+            try {
+                const response = await axios.get(`https://api.telegram.org/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/getUserProfilePhotos?user_id=${user.id}`);
+                const photos = response.data.result.photos;
+                if (photos.length > 0) {
+                    const photoUrl = `https://api.telegram.org/file/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/${photos[0][0].file_id}`;
+                    setUserPhoto(photoUrl);
+                }
+            } catch (error) {
+                console.error('Error fetching user photo', error);
+            }
+        };
+
         if (!user) {
             fetchUserData();
         }
+        fetchUserPhoto(user)
 
     }, [user, checkBalance]);
 

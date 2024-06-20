@@ -58,7 +58,6 @@ export default function User({ checkBalance }) {
                         {firstLetter}
                     </span>
                 }
-                <p style={{ fontSize: 34 + 'px', backgroundColor: 'red', marginTop: 200 + 'px' }}>url: {userPhoto ? 'yes' : 'no'}</p>
                 <img className='rank' src={UserRank} alt="Rank" />
                 <img src={Border} className='border' alt="Border" />
             </div>

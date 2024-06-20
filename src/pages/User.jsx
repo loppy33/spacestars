@@ -44,7 +44,7 @@ export default function User({checkBalance}) {
                         {firstLetter}
                     </span>
                 }
-                <p style={{fontSize: 34+'px', backgroundColor: 'red', marginTop: 200+'px'}}>url: {initDataUnsafe?.user?.photo_url}</p>
+                <p style={{fontSize: 34+'px', backgroundColor: 'red', marginTop: 200+'px'}}>url: {initDataUnsafe?.user?.photo_url ? 'yes' : 'no' }</p>
                 <img className='rank' src={UserRank} alt="Rank" />
                 <img src={Border} className='border' alt="Border" />
             </div>

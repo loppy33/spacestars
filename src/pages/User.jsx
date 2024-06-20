@@ -28,7 +28,10 @@ export default function User({ checkBalance }) {
                 const response = await axios.get(`https://api.telegram.org/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/getUserProfilePhotos?user_id=${user.id}`);
                 const photos = response.data.result.photos;
                 if (photos.length > 0) {
-                    const photoUrl = `https://api.telegram.org/file/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/${photos[0][0].file_id}`;
+                    const fileId = photos[0][0].file_id;
+                    const fileResponse = await axios.get(`https://api.telegram.org/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/getFile?file_id=${fileId}`);
+                    const filePath = fileResponse.data.result.file_path;
+                    const photoUrl = `https://api.telegram.org/file/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/${filePath}`;
                     setUserPhoto(photoUrl);
                 }
             } catch (error) {

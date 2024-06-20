@@ -3,11 +3,13 @@ import UserRank from "../assets/rank.png"
 import Border from "../assets/border.png"
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useInitData } from '@vkruglikov/react-telegram-web-app';
 
 export default function User({checkBalance}) {
     // Получение данных пользователя из Telegram WebApp
-    // const user = window.Telegram.WebApp.initDataUnsafe.user;
-    const [user, setUser] = useState(window.Telegram.WebApp.initDataUnsafe)
+    const user = window.Telegram.WebApp.initDataUnsafe.user;
+    // const [user, setUser] = useState(window.Telegram.WebApp.initDataUnsafe.user)
+    const [initDataUnsafe] = useInitData();
     const firstLetter = user?.username ? user.username.charAt(0).toUpperCase() : 'U';
     const [balance, setBalance] = useState(null);
 
@@ -35,14 +37,14 @@ export default function User({checkBalance}) {
     return (
         <div className="User">
             <div className="avatarContainer">
-                {user?.photo_url ?
-                    <img className='avatar' src={user.photo_url} alt={user?.username || 'User Avatar'} />
+                {initDataUnsafe?.user?.photo_url ?
+                    <img className='avatar' src={initDataUnsafe?.user?.photo_url} alt={user?.username || 'User Avatar'} />
                     :
                     <span className="avatarFallback">
                         {firstLetter}
                     </span>
                 }
-                <p style={{fontSize: 34+'px', backgroundColor: 'red', marginTop: 200+'px'}}>url: {user?.photo_url}</p>
+                <p style={{fontSize: 34+'px', backgroundColor: 'red', marginTop: 200+'px'}}>url: {initDataUnsafe?.user?.photo_url}</p>
                 <img className='rank' src={UserRank} alt="Rank" />
                 <img src={Border} className='border' alt="Border" />
             </div>

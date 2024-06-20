@@ -5,13 +5,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useInitData } from '@vkruglikov/react-telegram-web-app';
 
-export default function User({checkBalance}) {
+export default function User({ checkBalance }) {
     // Получение данных пользователя из Telegram WebApp
     const user = window.Telegram.WebApp.initDataUnsafe.user;
-    // const [user, setUser] = useState(window.Telegram.WebApp.initDataUnsafe.user)
     const [initDataUnsafe] = useInitData();
     const firstLetter = user?.username ? user.username.charAt(0).toUpperCase() : 'U';
     const [balance, setBalance] = useState(null);
+    const [userPhoto, setUserPhoto] = useState(user ? `https://api.telegram.org/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/getUserProfilePhotos?user_id=${user.id}` : null)
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -29,7 +29,7 @@ export default function User({checkBalance}) {
         if (!user) {
             fetchUserData();
         }
-        
+
     }, [user, checkBalance]);
 
     const formattedBalance = balance !== null ? parseFloat(balance.toFixed(3)).toLocaleString('en-US') : '0';
@@ -37,14 +37,14 @@ export default function User({checkBalance}) {
     return (
         <div className="User">
             <div className="avatarContainer">
-                {initDataUnsafe?.user?.photo_url ?
-                    <img className='avatar' src={initDataUnsafe?.user?.photo_url} alt={user?.username || 'User Avatar'} />
+                {userPhoto ?
+                    <img className='avatar' src={userPhoto} alt={user?.username || 'User Avatar'} />
                     :
                     <span className="avatarFallback">
                         {firstLetter}
                     </span>
                 }
-                <p style={{fontSize: 34+'px', backgroundColor: 'red', marginTop: 200+'px'}}>url: {initDataUnsafe?.user?.photo_url ? 'yes' : 'no' }</p>
+                <p style={{ fontSize: 34 + 'px', backgroundColor: 'red', marginTop: 200 + 'px' }}>url: {userPhoto ? 'yes' : 'no'}</p>
                 <img className='rank' src={UserRank} alt="Rank" />
                 <img src={Border} className='border' alt="Border" />
             </div>

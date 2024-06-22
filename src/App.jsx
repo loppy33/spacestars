@@ -1,61 +1,83 @@
-import Home from "./pages/Home/Home"
-import Task from "./pages/Task/Task"
-import Frens from "./pages/Frens/Frens";
-import Garage from "./pages/Garage/Garage";
-
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import { useExpand } from '@vkruglikov/react-telegram-web-app';
-import Top from "./pages/Top/Top";
 import axios from 'axios';
 
-const tg = window.Telegram.WebApp
+import Home from './pages/Home/Home';
+import Task from './pages/Task/Task';
+import Frens from './pages/Frens/Frens';
+import Garage from './pages/Garage/Garage';
+import Top from './pages/Top/Top';
 
-function App() {
+const tg = window.Telegram.WebApp;
+
+const fetchUserData = async (userId) => {
+  const response = await axios.get(`http://localhost:3000/api/users/getUser/${userId}`);
+  return response.data;
+};
+
+const fetchUserPhoto = async (userId) => {
+  const response = await axios.get(`https://api.telegram.org/bot<your-bot-token>/getUserProfilePhotos?user_id=${userId}`);
+  const photos = response.data.result.photos;
+  if (photos.length > 0) {
+    const fileId = photos[0][0].file_id;
+    const fileResponse = await axios.get(`https://api.telegram.org/bot<your-bot-token>/getFile?file_id=${fileId}`);
+    const filePath = fileResponse.data.result.file_path;
+    const photoUrl = `https://api.telegram.org/file/bot<your-bot-token>/${filePath}`;
+    return photoUrl;
+  }
+  return '';
+};
+
+const App = () => {
   const [isExpanded, expand] = useExpand();
-  const [checkBalance, setCheckBalance] = useState(0)
-  const user = window.Telegram.WebApp.initDataUnsafe.user;
+  const user = tg.initDataUnsafe.user;
+  const [balance, setBalance] = useState(0.000);
+  const [userPhoto, setUserPhoto] = useState('');
+
+  // Fetch user data using React Query
+  // user.id
+  const { data: userData } = useQuery(['userData', user?.id], () => fetchUserData(1234), {
+    enabled: !user,
+    onError: (error) => {
+      console.error('Error fetching user data', error);
+    },
+    onSuccess: (data) => {
+      setBalance(data.balance);
+    },
+  });
+
+  // Fetch user photo using React Query
+  // user.id
+  const { data: userPhotoData } = useQuery(['userPhoto', user?.id], () => fetchUserPhoto(1234), {
+    enabled: !user,
+    onSuccess: (data) => {
+      setUserPhoto(data);
+    },
+    onError: (error) => {
+      console.error('Error fetching user photo', error);
+    },
+  });
 
   useEffect(() => {
-    const addUser = async () => {
-      // id: user.id
-      try {
-        const response = await axios.post('http://localhost:3000/addUser', {
-          id: 1234,
-          balance: 0.000,
-          farmingTime: null,
-          entryTime: new Date(),
-          friends: []
-        });
-        console.log(response.data);
-      } catch (error) {
-        console.error('Error adding user', error);
-      }
-    };
-
-    if (!user) {
-      addUser();
+    if (!isExpanded) {
+      expand();
     }
-  }, [user]);
-
-  useEffect(() => {
-    !isExpanded && expand()
-    tg.setHeaderColor("#000000")
-  }, [])
-
-
+    tg.setHeaderColor('#000000');
+  }, [isExpanded, expand, tg]);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/spacestars/" element={<Home checkBalance={checkBalance} setCheckBalance={setCheckBalance}/>} />
-        <Route path="/spacestars/task" element={<Task />} />
+        <Route path="/spacestars/" element={<Home balance={balance} setBalance={setBalance} userPhoto={userPhotoData} />} />
+        <Route path="/spacestars/task" element={<Task balance={balance} setBalance={setBalance} userPhoto={userPhotoData} />} />
         <Route path="/spacestars/frens" element={<Frens />} />
         <Route path="/spacestars/garage" element={<Garage />} />
         <Route path="/spacestars/top" element={<Top />} />
       </Routes>
     </BrowserRouter>
-  )
-}
+  );
+};
 
-export default App
+export default App;

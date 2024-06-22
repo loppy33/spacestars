@@ -5,16 +5,17 @@ import axios from 'axios';
 const FARMING_INTERVAL = 500; // Interval in milliseconds (0.5 seconds)
 const FARMING_AMOUNT = 0.001; // Amount earned per interval
 
-export default function Farm({ setCheckBalance }) {
+export default function Farm({ setBalance }) {
+    const user = window.Telegram.WebApp.initDataUnsafe.user;
     const [farmingStartTime, setFarmingStartTime] = useState(null);
     const [timeRemaining, setTimeRemaining] = useState(null);
     const [rewardAvailable, setRewardAvailable] = useState(false);
-    const [balance, setBalance] = useState(0);
+    const [farmBalance, setFarmBalance] = useState(0)
 
     useEffect(() => {
         const fetchFarmingData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/getUser/1234`);
+                const response = await axios.get(`http://localhost:3000/api/users/getUser/1234`);
                 const { farmingTime } = response.data;
 
                 if (farmingTime) {
@@ -33,7 +34,7 @@ export default function Farm({ setCheckBalance }) {
 
         const startFarmingInterval = () => {
             interval = setInterval(() => {
-                setBalance(prevBalance => prevBalance + FARMING_AMOUNT);
+                setFarmBalance(prevBalance => prevBalance + FARMING_AMOUNT);
             }, FARMING_INTERVAL);
         };
 
@@ -44,7 +45,8 @@ export default function Farm({ setCheckBalance }) {
         if (farmingStartTime) {
         
             const endTime = new Date(farmingStartTime);
-            endTime.setHours(endTime.getHours() + 8); // 1 minute farming time
+            // endTime.setHours(endTime.getHours() + 8); // 1 minute farming time
+            endTime.setSeconds(endTime.getSeconds() + 5); // 1 minute farming time
 
             const checkTime = () => {
                 const now = new Date();
@@ -63,7 +65,7 @@ export default function Farm({ setCheckBalance }) {
             const currentTime = new Date();
             const elapsedTime = currentTime - farmingStartTimeDate;
             const earnedAmount = (elapsedTime / FARMING_INTERVAL) * FARMING_AMOUNT;
-            setBalance(earnedAmount);
+            setFarmBalance(earnedAmount);
 
             startFarmingInterval();
 
@@ -80,7 +82,7 @@ export default function Farm({ setCheckBalance }) {
         if (!farmingStartTime && !rewardAvailable) {
             const farmingStartTime = new Date().toISOString();
             try {
-                await axios.post('http://localhost:3000/startFarming', {
+                await axios.post('http://localhost:3000/api/farming/startFarming', {
                     id: 1234,
                     farmingTime: farmingStartTime
                 });
@@ -93,21 +95,22 @@ export default function Farm({ setCheckBalance }) {
     };
 
     const claimReward = async () => {
-        if (rewardAvailable && balance > 0) {
+        if (rewardAvailable && farmBalance > 0) {
             try {
-                await axios.post('http://localhost:3000/claimReward', {
+                await axios.post('http://localhost:3000/api/farming/claimReward', {
                     id: 1234,
-                    amount: balance.toFixed(3)
+                    amount: farmBalance.toFixed(3)
                 });
 
-                await axios.post('http://localhost:3000/startFarming', {
+                await axios.post('http://localhost:3000/api/farming/startFarming', {
                     id: 1234,
                     farmingTime: null
                 });
                 setFarmingStartTime(null);
-                setBalance(0);
+                setBalance(prevBalance => prevBalance + farmBalance)
+                setFarmBalance(0);
                 setRewardAvailable(false);
-                setCheckBalance(Math.random());
+
             } catch (error) {
                 console.error('Error claiming reward', error);
             }
@@ -130,13 +133,13 @@ export default function Farm({ setCheckBalance }) {
             )}
             {farmingStartTime && (
                 <div className="farming">
-                    <h2>Farming {balance.toFixed(3)}</h2>
+                    <h2>Farming {farmBalance.toFixed(3)}</h2>
                     <h2>{timeRemaining}</h2>
                 </div>
             )}
-            {rewardAvailable && balance > 0 && (
+            {rewardAvailable && farmBalance > 0 && (
                 <div className="claimReward" onClick={claimReward}>
-                    <h2>Claim {balance.toFixed(3)} PN</h2>
+                    <h2>Claim {farmBalance.toFixed(3)} PN</h2>
                 </div>
             )}
         </div>

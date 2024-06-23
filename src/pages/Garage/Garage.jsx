@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Rockets from './components/rockets/rockets';
 import Starships from './components/starships/starships';
 
-import Rocket from '../../assets/rocket.png'
+import Rocket from '../../assets/rocket1.png'
 import Money from '../../assets/money.png'
 import Footer from '../Home/components/footer/Footer';
 

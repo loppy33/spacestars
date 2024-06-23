@@ -5,7 +5,7 @@ import Planet1 from '../../../../assets/planet1.png'
 import Planet2 from '../../../../assets/planet2.png'
 import Planet3 from '../../../../assets/planet3.png'
 import Planet4 from '../../../../assets/planet4.png'
-import Rocket from '../../../../assets/Rocket_sil.png'
+import Rocket from '../../../../assets/rocket1.png'
 
 export default function Game() {
     return (

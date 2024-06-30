@@ -13,7 +13,7 @@ import Top from './pages/Top/Top';
 const tg = window.Telegram.WebApp;
 
 const fetchUserData = async (userId) => {
-  const response = await axios.get(`https://38.180.23.221:3000/api/users/getUser/${userId}`);
+  const response = await axios.get(`http://38.180.23.221:3000/api/users/getUser/${userId}`);
   return response.data;
 };
 

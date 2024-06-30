@@ -15,7 +15,7 @@ export default function Farm({ setBalance }) {
     useEffect(() => {
         const fetchFarmingData = async () => {
             try {
-                const response = await axios.get(`https://38.180.23.221:3000/api/users/getUser/${user.id}`);
+                const response = await axios.get(`http://38.180.23.221:3000/api/users/getUser/${user.id}`);
                 const { farmingTime } = response.data;
 
                 if (farmingTime) {
@@ -68,7 +68,7 @@ export default function Farm({ setBalance }) {
         if (!farmingStartTime && !rewardAvailable) {
             const farmingStartTime = new Date().toISOString();
             try {
-                await axios.post('https://38.180.23.221:3000/api/farming/startFarming', {
+                await axios.post('http://38.180.23.221:3000/api/farming/startFarming', {
                     id: user.id,
                     farmingTime: farmingStartTime
                 });
@@ -83,12 +83,12 @@ export default function Farm({ setBalance }) {
     const claimReward = async () => {
         if (rewardAvailable && farmBalance > 0) {
             try {
-                await axios.post('https://38.180.23.221:3000/api/farming/claimReward', {
+                await axios.post('http://38.180.23.221:3000/api/farming/claimReward', {
                     id: user.id,
                     amount: farmBalance.toFixed(3)
                 });
 
-                await axios.post('https://38.180.23.221:3000/api/farming/startFarming', {
+                await axios.post('http://38.180.23.221:3000/api/farming/startFarming', {
                     id: user.id,
                     farmingTime: null
                 });

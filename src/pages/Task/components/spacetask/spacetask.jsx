@@ -13,14 +13,14 @@ export default function SpaceTask() {
     const { data: completedTasks = [], refetch: refetchTasks } = useQuery(
         'userTasks',
         async () => {
-            const response = await axios.get(`https://38.180.23.221:3000/api/users/getUser/${userId}`);
+            const response = await axios.get(`http://38.180.23.221:3000/api/users/getUser/${userId}`);
             return response.data.tasks || [];
         }
     );
 
     // Mutation for completing tasks
     const completeTaskMutation = useMutation(
-        ({ task }) => axios.post('https://38.180.23.221:3000/api/farming/completeTask', { id: userId, task }),
+        ({ task }) => axios.post('http://38.180.23.221:3000/api/farming/completeTask', { id: userId, task }),
         {
             onSuccess: () => {
                 refetchTasks(); // Refresh tasks after completing

@@ -47,7 +47,7 @@ export default function Garage() {
 
     // Используем useQuery для получения данных о балансе и уровне пользователя
     const { data: userData, isLoading, error } = useQuery('userData', async () => {
-        const response = await axios.get(`https://38.180.23.221:3000/api/users/getUser/${user.id}`);
+        const response = await axios.get(`http://38.180.23.221:3000/api/users/getUser/${user.id}`);
         return response.data;
     });
 

@@ -12,7 +12,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useQuery, useMutation } from 'react-query';
 
 const fetchUserFriends = async (userId) => {
-    const response = await fetch(`https://38.180.23.221:3000/getUserFriends/${userId}`);
+    const response = await fetch(`http://38.180.23.221:3000/getUserFriends/${userId}`);
     if (!response.ok) {
         throw new Error('Failed to fetch user friends');
     }

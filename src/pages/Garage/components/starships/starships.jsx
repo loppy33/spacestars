@@ -46,12 +46,12 @@ export default function Starships() {
     ];
 
     const { data: userData, isLoading, error } = useQuery(['user', userId], () =>
-        axios.get(`https://38.180.23.221:3000/api/users/getUser/${userId}`).then(res => res.data)
+        axios.get(`http://38.180.23.221:3000/api/users/getUser/${userId}`).then(res => res.data)
     );
 
     const mutation = useMutation(
         ({ price, level }) =>
-            axios.post('https://38.180.23.221:3000/api/farming/buyRocket', {
+            axios.post('http://38.180.23.221:3000/api/farming/buyRocket', {
                 id: userId,
                 lvl: level,
                 price: price

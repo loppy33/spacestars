@@ -44,7 +44,7 @@ const fetchUserPhotoAndUsername = async (userId) => {
 };
 
 const fetchUserPosition = async (userId) => {
-    const response = await fetch(`https://38.180.23.221:3000/api/users/position/${userId}`);
+    const response = await fetch(`http://38.180.23.221:3000/api/users/position/${userId}`);
     if (!response.ok) {
         throw new Error('Failed to fetch user position');
     }
@@ -53,7 +53,7 @@ const fetchUserPosition = async (userId) => {
 
 
 const fetchTopUsers = async () => {
-    const response = await fetch('https://38.180.23.221:3000/api/users/top');
+    const response = await fetch('http://38.180.23.221:3000/api/users/top');
     if (!response.ok) {
         throw new Error('Failed to fetch top users');
     }

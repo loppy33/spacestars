@@ -1,5 +1,5 @@
 import './Top.sass';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -23,17 +23,17 @@ import { useQuery } from 'react-query';
 
 const fetchUserPhotoAndUsername = async (userId) => {
     try {
-        const response = await axios.get(`https://api.telegram.org/botYOUR_BOT_TOKEN/getUserProfilePhotos?user_id=${userId}`);
+        const response = await axios.get(`https://api.telegram.org/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/getUserProfilePhotos?user_id=${userId}`);
         const photos = response.data.result.photos;
         let photoUrl = UserAvatar; // Default avatar
         if (photos.length > 0) {
             const fileId = photos[0][0].file_id;
-            const fileResponse = await axios.get(`https://api.telegram.org/botYOUR_BOT_TOKEN/getFile?file_id=${fileId}`);
+            const fileResponse = await axios.get(`https://api.telegram.org/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/getFile?file_id=${fileId}`);
             const filePath = fileResponse.data.result.file_path;
-            photoUrl = `https://api.telegram.org/file/botYOUR_BOT_TOKEN/${filePath}`;
+            photoUrl = `https://api.telegram.org/file/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/${filePath}`;
         }
 
-        const userResponse = await axios.get(`https://api.telegram.org/botYOUR_BOT_TOKEN/getChat?chat_id=${userId}`);
+        const userResponse = await axios.get(`https://api.telegram.org/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/getChat?chat_id=${userId}`);
         const username = userResponse.data.result.username || userResponse.data.result.first_name || 'Unknown';
 
         return { photoUrl, username };
@@ -43,19 +43,45 @@ const fetchUserPhotoAndUsername = async (userId) => {
     }
 };
 
+const fetchUserPosition = async (userId) => {
+    const response = await fetch(`https://38.180.23.221:3000/api/users/position/${userId}`);
+    if (!response.ok) {
+        throw new Error('Failed to fetch user position');
+    }
+    return response.json();
+};
+
+
 const fetchTopUsers = async () => {
-    const response = await fetch('http://localhost:3000/api/users/top');
+    const response = await fetch('https://38.180.23.221:3000/api/users/top');
     if (!response.ok) {
         throw new Error('Failed to fetch top users');
     }
     return response.json();
 };
 
-export default function Top() {
+export default function Top({ balance, userPhoto }) {
+    const user = window.Telegram.WebApp.initDataUnsafe.user;
     const navigate = useNavigate();
     const sliderRef = useRef(null);
+    const [userPosition, setUserPosition] = useState(null);
 
     const { data: categories, isLoading, isError } = useQuery('topUsers', fetchTopUsers);
+
+    useEffect(() => {
+        const fetchPosition = async () => {
+            try {
+                // const { position } = await fetchUserPosition(user.id);
+                const { position } = await fetchUserPosition(user.id);
+                setUserPosition(position);
+            } catch (error) {
+                console.error('Error fetching user position:', error);
+            }
+        };
+
+        fetchPosition();
+    }, []);
+// }, [user.id]);
 
     const renderUser = (user, index) => (
         <li key={user.id}>
@@ -95,13 +121,13 @@ export default function Top() {
                 </ul>
                 <div className="userInfo">
                     <div className="info">
-                        <img src={UserAvatar} alt="" />
+                        <img src={userPhoto ? userPhoto : UserAvatar} alt="" />
                         <div>
-                            <p>UserName</p>
-                            <span>23,435 PN</span>
+                            <p>{user?.username}</p>
+                            <span>{balance} PN</span>
                         </div>
                     </div>
-                    <span>ЗДЕСЬ МЕСТО В ТОПЕ</span>
+                    <span>{userPosition !== null ? userPosition : 'Loading...'}</span>
                 </div>
             </div>
         </SwiperSlide>

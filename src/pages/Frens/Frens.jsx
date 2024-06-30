@@ -12,7 +12,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useQuery, useMutation } from 'react-query';
 
 const fetchUserFriends = async (userId) => {
-    const response = await fetch(`http://localhost:3000/getUserFriends/${userId}`);
+    const response = await fetch(`https://38.180.23.221:3000/getUserFriends/${userId}`);
     if (!response.ok) {
         throw new Error('Failed to fetch user friends');
     }
@@ -21,17 +21,17 @@ const fetchUserFriends = async (userId) => {
 
 const fetchUserPhotoAndUsername = async (userId) => {
     try {
-        const response = await axios.get(`https://api.telegram.org/botYOUR_BOT_TOKEN/getUserProfilePhotos?user_id=${userId}`);
+        const response = await axios.get(`https://api.telegram.org/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/getUserProfilePhotos?user_id=${userId}`);
         const photos = response.data.result.photos;
         let photoUrl = UserAvatar; // Default avatar
         if (photos.length > 0) {
             const fileId = photos[0][0].file_id;
-            const fileResponse = await axios.get(`https://api.telegram.org/botYOUR_BOT_TOKEN/getFile?file_id=${fileId}`);
+            const fileResponse = await axios.get(`https://api.telegram.org/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/getFile?file_id=${fileId}`);
             const filePath = fileResponse.data.result.file_path;
-            photoUrl = `https://api.telegram.org/file/botYOUR_BOT_TOKEN/${filePath}`;
+            photoUrl = `https://api.telegram.org/file/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/${filePath}`;
         }
         
-        const userResponse = await axios.get(`https://api.telegram.org/botYOUR_BOT_TOKEN/getChat?chat_id=${userId}`);
+        const userResponse = await axios.get(`https://api.telegram.org/bot6455228955:AAHV4ZE3rtxuw04a7XF2C9Em3HCaW4hTmXw/getChat?chat_id=${userId}`);
         const username = userResponse.data.result.username || userResponse.data.result.first_name || 'Unknown';
 
         return { photoUrl, username };
@@ -42,7 +42,7 @@ const fetchUserPhotoAndUsername = async (userId) => {
 };
 
 export default function Frens() {
-    const user = window.Telegram.WebApp.initDataUnsafe.user || 1234;
+    const user = window.Telegram.WebApp.initDataUnsafe.user;
     const navigate = useNavigate();
     const [refLink, setRefLink] = useState('');
     const [copySuccess, setCopySuccess] = useState(false);

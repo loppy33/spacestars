@@ -10,16 +10,17 @@ import { useEffect } from 'react';
 import { useQuery, useMutation } from 'react-query';
 
 export default function Achivment({ setBalance }) {
-    const userId = 1234; // Replace with actual user id
+    const userId = window.Telegram.WebApp.initDataUnsafe.user.id;
+
 
     const { data: userStatus, refetch: refetchUserStatus } = useQuery(['userStatus', userId], async () => {
-        const response = await axios.get(`http://localhost:3000/api/users/status/${userId}`);
+        const response = await axios.get(`https://38.180.23.221:3000/api/users/status/${userId}`);
         return response.data;
     });
 
     const claimAchievement = useMutation(
         async ({ rewardType }) => {
-            const response = await axios.post(`http://localhost:3000/api/farming/claimAchievement`, { id: userId, rewardType });
+            const response = await axios.post(`https://38.180.23.221:3000/api/farming/claimAchievement`, { id: userId, rewardType });
             return response.data;
         },
         {

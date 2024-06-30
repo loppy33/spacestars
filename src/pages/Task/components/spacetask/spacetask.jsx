@@ -5,21 +5,22 @@ import Telegram from "../../../../assets/icons/teleg.png";
 import { useQuery, useMutation } from 'react-query';
 import axios from 'axios';
 
-const userId = 1234; // Replace with actual user id
+const userId = window.Telegram.WebApp.initDataUnsafe.user.id;
+
 
 export default function SpaceTask() {
     // Fetch user tasks
     const { data: completedTasks = [], refetch: refetchTasks } = useQuery(
         'userTasks',
         async () => {
-            const response = await axios.get(`http://localhost:3000/api/users/getUser/${userId}`);
+            const response = await axios.get(`https://38.180.23.221:3000/api/users/getUser/${userId}`);
             return response.data.tasks || [];
         }
     );
 
     // Mutation for completing tasks
     const completeTaskMutation = useMutation(
-        ({ task }) => axios.post('http://localhost:3000/api/farming/completeTask', { id: userId, task }),
+        ({ task }) => axios.post('https://38.180.23.221:3000/api/farming/completeTask', { id: userId, task }),
         {
             onSuccess: () => {
                 refetchTasks(); // Refresh tasks after completing

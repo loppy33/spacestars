@@ -10,7 +10,7 @@ export default defineConfig({
     proxy: {
       // Пример настройки прокси для API запросов к вашему Express серверу
       '/api': {
-        target: 'http://localhost:3000', // URL вашего Express сервера
+        target: 'https://38.180.23.221:3000', // URL вашего Express сервера
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },

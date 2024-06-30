@@ -15,7 +15,7 @@ export default function Farm({ setBalance }) {
     useEffect(() => {
         const fetchFarmingData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/users/getUser/1234`);
+                const response = await axios.get(`https://38.180.23.221:3000/api/users/getUser/${user.id}`);
                 const { farmingTime } = response.data;
 
                 if (farmingTime) {
@@ -34,46 +34,32 @@ export default function Farm({ setBalance }) {
 
         const startFarmingInterval = () => {
             interval = setInterval(() => {
-                setFarmBalance(prevBalance => prevBalance + FARMING_AMOUNT);
-            }, FARMING_INTERVAL);
-        };
-
-        const stopFarmingInterval = () => {
-            clearInterval(interval);
-        };
-
-        if (farmingStartTime) {
-        
-            const endTime = new Date(farmingStartTime);
-            // endTime.setHours(endTime.getHours() + 8); // 1 minute farming time
-            endTime.setSeconds(endTime.getSeconds() + 5); // 1 minute farming time
-
-            const checkTime = () => {
-                const now = new Date();
+                const now = new Date().getTime();
+                const endTime = farmingStartTime + 8 * 60 * 60 * 1000; 
 
                 if (now < endTime) {
+                    setFarmBalance(prevBalance => prevBalance + FARMING_AMOUNT);
                     const timeDiff = endTime - now;
                     setTimeRemaining(formatTimeDiff(timeDiff));
                 } else {
-                    stopFarmingInterval();
+                    clearInterval(interval);
                     setFarmingStartTime(null);
                     setRewardAvailable(true);
+                    setTimeRemaining(null);
                 }
-            };
+            }, FARMING_INTERVAL);
+        };
 
-            const farmingStartTimeDate = new Date(farmingStartTime);
-            const currentTime = new Date();
-            const elapsedTime = currentTime - farmingStartTimeDate;
+        if (farmingStartTime) {
+            const now = new Date().getTime();
+            const elapsedTime = now - farmingStartTime;
             const earnedAmount = (elapsedTime / FARMING_INTERVAL) * FARMING_AMOUNT;
             setFarmBalance(earnedAmount);
 
             startFarmingInterval();
 
-            const timer = setInterval(checkTime, 1000);
-
             return () => {
-                clearInterval(timer);
-                stopFarmingInterval();
+                clearInterval(interval);
             };
         }
     }, [farmingStartTime]);
@@ -82,8 +68,8 @@ export default function Farm({ setBalance }) {
         if (!farmingStartTime && !rewardAvailable) {
             const farmingStartTime = new Date().toISOString();
             try {
-                await axios.post('http://localhost:3000/api/farming/startFarming', {
-                    id: 1234,
+                await axios.post('https://38.180.23.221:3000/api/farming/startFarming', {
+                    id: user.id,
                     farmingTime: farmingStartTime
                 });
                 setFarmingStartTime(new Date(farmingStartTime).getTime());
@@ -97,13 +83,13 @@ export default function Farm({ setBalance }) {
     const claimReward = async () => {
         if (rewardAvailable && farmBalance > 0) {
             try {
-                await axios.post('http://localhost:3000/api/farming/claimReward', {
-                    id: 1234,
+                await axios.post('https://38.180.23.221:3000/api/farming/claimReward', {
+                    id: user.id,
                     amount: farmBalance.toFixed(3)
                 });
 
-                await axios.post('http://localhost:3000/api/farming/startFarming', {
-                    id: 1234,
+                await axios.post('https://38.180.23.221:3000/api/farming/startFarming', {
+                    id: user.id,
                     farmingTime: null
                 });
                 setFarmingStartTime(null);
